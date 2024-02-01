@@ -24,11 +24,50 @@
   -webkit-text-size-adjust: 100%;
 }
 
+section {
+  margin-bottom: 25px;
+}
+
+button[data-start] {
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  background-color: #4e75ff;
+}
+
+button[data-start]:disabled {
+  background-color: #cfcfcf;
+}
+
+button[data-start]:hover,
+button[data-start]:focus {
+  background-color: #6c8cff;
+}
+
+#datetime-picker {
+  width: 240px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+#datetime-picker:hover,
+#datetime-picker:focus {
+  outline-color: blue;
+}
+
 .timer {
   display: flex;
+  gap: 24px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
+  text-align: center;
+}
+
+.label {
+  font-size: 12px;
+  text-transform: uppercase;
 }

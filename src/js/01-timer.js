@@ -1,16 +1,19 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-const myInput = document.querySelector('#datetime-picker');
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
-const refs = {
-  btnStart: document.querySelector('[data-start]'),
+const myInput = document.querySelector('#datetime-picker');
+const btnStart = document.querySelector('[data-start]');
+btnStart.addEventListener('click', onBtnStartClick);
+let userSelectedDate = null;
+
+const timerRefs = {
   days: document.querySelector('[data-days]'),
   hours: document.querySelector('[data-hours]'),
   minutes: document.querySelector('[data-minutes]'),
   seconds: document.querySelector('[data-seconds]'),
 };
-// const btnStart = document.querySelector('[data-start]');
-let userSelectedDate;
 
 const options = {
   enableTime: true,
@@ -18,31 +21,46 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    const startTime = Date.now();
-    console.log(startTime);
-    if (selectedDates[0] > startTime) {
+    if (selectedDates[0] > Date.now()) {
       userSelectedDate = selectedDates[0];
-      refs.btnStart.removeAttribute('disabled');
-      console.log(userSelectedDate.getTime());
-
-      const deltaTime = userSelectedDate.getTime() - startTime;
-      console.log(deltaTime);
-
-      const result = convertMs(deltaTime);
-      console.log(result);
-
-      refs.days = result.days;
-      refs.hours = result.hours;
-      refs.minutes = result.minutes;
-      refs.seconds = result.seconds;
+      btnStart.removeAttribute('disabled');
     } else {
-      refs.btnStart.setAttribute('disabled', 'true');
-      window.alert('Please choose a date in the future');
+      btnStart.setAttribute('disabled', 'true');
+      iziToast.show({
+        color: 'red',
+        message: 'Please choose a date in the future',
+        position: 'topRight',
+      });
+      // window.alert('Please choose a date in the future');
     }
   },
 };
 
 const fp = flatpickr(myInput, options);
+
+function onBtnStartClick() {
+  myInput.setAttribute('disabled', 'true');
+  const intervalId = setInterval(() => {
+    const deltaTime = userSelectedDate.getTime() - Date.now();
+
+    if (deltaTime > 0) {
+      const result = convertMs(deltaTime);
+      timerRefs.days.textContent = addLeadingZero(result.days);
+      timerRefs.hours.textContent = addLeadingZero(result.hours);
+      timerRefs.minutes.textContent = addLeadingZero(result.minutes);
+      timerRefs.seconds.textContent = addLeadingZero(result.seconds);
+      btnStart.setAttribute('disabled', 'true');
+    } else {
+      clearInterval(intervalId);
+      btnStart.removeAttribute('disabled');
+      myInput.removeAttribute('disabled');
+    }
+  }, 1000);
+}
+
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
