@@ -26,7 +26,7 @@ const options = {
       btnStart.removeAttribute('disabled');
     } else {
       btnStart.setAttribute('disabled', 'true');
-      iziToast.show({
+      iziToast.error({
         color: 'red',
         message: 'Please choose a date in the future',
         position: 'topRight',
@@ -42,7 +42,7 @@ function onBtnStartClick() {
   const intervalId = setInterval(() => {
     const deltaTime = userSelectedDate.getTime() - Date.now();
 
-    if (deltaTime > 0) {
+    if (deltaTime >= 0) {
       const result = convertMs(deltaTime);
       timerRefs.days.textContent = addLeadingZero(result.days);
       timerRefs.hours.textContent = addLeadingZero(result.hours);
@@ -51,7 +51,6 @@ function onBtnStartClick() {
       btnStart.setAttribute('disabled', 'true');
     } else {
       clearInterval(intervalId);
-      btnStart.removeAttribute('disabled');
       myInput.removeAttribute('disabled');
     }
   }, 1000);

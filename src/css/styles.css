@@ -24,6 +24,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+a:hover {
+  color: darkblue;
+}
+
 section {
   margin-bottom: 25px;
 }
@@ -65,6 +69,11 @@ button[data-start]:focus {
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+
+.value {
+  font-size: 32px;
+  margin-top: 10px;
 }
 
 .label {
