@@ -82,7 +82,7 @@ button[data-start]:focus {
 }
 
 .form input {
-  width: 360px;
+  width: 368px;
   border-radius: 5px;
   padding: 5px 10px;
   outline: none;
@@ -98,7 +98,7 @@ button[data-start]:focus {
   font-size: 18px;
 
   outline: none;
-  width: 360px;
+  width: 468px;
   padding: 5px 10px;
   border-radius: 5px;
   margin-top: 10px;
@@ -110,17 +110,21 @@ button[data-start]:focus {
   background-color: rgb(0, 149, 255);
 }
 
-label {
+.fieldset label {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-bottom: 15px;
 }
 
-fieldset {
+.form fieldset {
   width: 200px;
   padding: 5px 10px;
   border-radius: 5px;
   display: flex;
   text-align: center;
+}
+
+input[type='radio'] {
+  width: 215px;
 }
