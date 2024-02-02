@@ -7,6 +7,7 @@ const myInput = document.querySelector('#datetime-picker');
 const btnStart = document.querySelector('[data-start]');
 btnStart.addEventListener('click', onBtnStartClick);
 let userSelectedDate = null;
+btnStart.setAttribute('disabled', 'true');
 
 const timerRefs = {
   days: document.querySelector('[data-days]'),
