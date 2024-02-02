@@ -6,13 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snackbar</title>
     
-    <script type="module" crossorigin src="/goit-js-hw-10/assets/styles-37a7893a.js"></script>
+    <script type="module" crossorigin src="/goit-js-hw-10/commonHelpers2.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/styles-37a7893a.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-651d7991.js">
     <link rel="stylesheet" href="/goit-js-hw-10/assets/styles-9ba9fa62.css">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/vendor-80d0dc0f.css">
   </head>
   <body>
     <section>
       <a href="./index.html">Go home</a>
     </section>
+    <form class="form">
+      <label>
+        Delay (ms)
+        <input type="number" name="delay" required min="500" step="500" />
+      </label>
+
+      <fieldset>
+        <legend>State</legend>
+        <label>
+          <input type="radio" name="state" value="fulfilled" required />
+          Fulfilled
+        </label>
+        <label>
+          <input type="radio" name="state" value="rejected" required />
+          Rejected
+        </label>
+      </fieldset>
+
+      <button type="submit">Create notification</button>
+    </form>
+
     
   </body>
 </html>
